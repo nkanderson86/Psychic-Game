@@ -1,50 +1,51 @@
-// create empy arrays for letters to selected word and user guesses to track input 
-let unsolvedLetters = [];
-let rightGuess = [];
-let wrongGuess = [];
+// -------------------------VARIABLES ----------------------------------
 
 // Array of words to select from
-const wordBank = ['cubs', 'brewers', 'cardinals', 'reds', 'pirates', 'mets', 'phillies', 'nationals', 'braves', 'marlins', 'diamondbacks', 'rockies', 'dodgers', 'giants', 'padres', 'redsox', 'yankees', 'orioles', 'bluejays', 'rays', 'whitesox', 'twins', 'indians', 'royals', 'tigers', 'mariners', 'angels', 'athletics', 'rangers', 'astros'];
+const teamArray = ['cubs', 'brewers', 'cardinals', 'reds', 'pirates', 'mets', 'phillies', 'nationals', 'braves', 'marlins', 'diamondbacks', 'rockies', 'dodgers', 'giants', 'padres', 'redsox', 'yankees', 'orioles', 'bluejays', 'rays', 'whitesox', 'twins', 'indians', 'royals', 'tigers', 'mariners', 'angels', 'athletics', 'rangers', 'astros'];
+
 // Random number generator used to pull from array created above 
-let selectedWord = wordBank[Math.floor(Math.random() * wordBank.length)];
+let selectedTeam = teamArray[Math.floor(Math.random() * teamArray.length)];
+
 // testing
-console.log(selectedWord)
+console.log(selectedTeam);
 
-// function to push underscores to unsolvedLetters array and return array 
-let insertUnderscores = function () {
-    for (let i = 0; i < selectedWord.length; i++) {
-        unsolvedLetters.push('_ ');
+var wins;
+var losses;
+const maxGuess = 9;
+var guessesRemaining = 0;
+var gussedLetters = [];
+var teamLetters = [];
+var underscores = [];
 
+
+// ------------------------------FUNCTIONS-------------------------------------
+
+function startGame() {
+    // reset guesses and display on html 
+    let guessesRemaining = maxGuess;
+    document.getElementById('guesses-remaining').innerHTML = "Guesses Remaining: " + guessesRemaining;
+    // take letters from selected word and turn into array of '_' 
+    let underscores = function () {
+        for (let i = 0; i < selectedTeam.length; i++) {
+            unsolvedLetters.push('_ ');
+        }
+        console.log(underscores)
     }
-    return insertUnderscores();
-
 }
 
 
 // Event listener to take user input for guesses and add guessed letters to array 'lettersGuessed'
 document.onkeyup = function (event) {
-    let userInput = event.key;
+    var userInput = event.key.toLowerCase();
     console.log(userInput);
+}
+    // if user guess is correct
 
-    // if user guess is correct 
-
-    // push to right guess array 
-    // if (selectedWord.indexOf(userInput) > - 1) {
-    //     rightGuess.push(userInput);
-    //     console.log(rightGuess);
+    // replace underscore with correct guess 
 
 
-    //     // replace underscore with correct guess 
-
-    // }
     // // if not, push to wrongGuess array
 
-    // else {
-    //     wrongGuess.push(userInput);
-    //     console.log(wrongGuess);
-    // }
-
-}
 
 //Check to see if user has won or guesses have run out and loop back to start of guess logic 
 
