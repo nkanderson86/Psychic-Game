@@ -3,8 +3,7 @@
 // Array of words to select from
 const letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
 
-// Random number generator used to pull from array created above 
-
+// global variable set up to be used for game
 var wins = 0;
 var losses = 0;
 var guesses;
@@ -12,15 +11,15 @@ var guessedLetters = [];
 var selectedLetter = "";
 
 
+// This is the start game function that I will call to reset my guesses, guessed letters, and select a new random letter.
 
 function start() {
     selectedLetter = letters[Math.floor(Math.random() * letters.length)];
     guesses = 10;
     guessedLetters = [];
-    console.log(selectedLetter);
-
 }
 
+// Function to listen for the first key the user hits and then start game, inside this function I call the 'checkGuess' function which evaluates the user's input.  And then I update the content of the html for the variables listed on the last 4 lines of the the function(event)
 document.onkeyup = function (event) {
     start();
     document.onkeyup = function (event) {
@@ -32,7 +31,7 @@ document.onkeyup = function (event) {
         document.getElementById("losses").textContent = losses;
     }
 
-    // checkGuess function 
+    // Function to check each letter that is guessed.  If it's a match, the game is over and the user wins.  If not, guesses are decremented until they hit 0.  At which point the game is over.  In either case, the start () function is called and the game loops.  The first if statement is to not accept a letter guess if the user has already guessed it in the current instance of the game.  
 
     function checkGuess(ltr) {
         if (guessedLetters.indexOf(ltr) > -1) {
