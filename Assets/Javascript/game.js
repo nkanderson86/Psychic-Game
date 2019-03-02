@@ -1,53 +1,87 @@
 // -------------------------VARIABLES ----------------------------------
 
 // Array of words to select from
-const teamArray = ['cubs', 'brewers', 'cardinals', 'reds', 'pirates', 'mets', 'phillies', 'nationals', 'braves', 'marlins', 'diamondbacks', 'rockies', 'dodgers', 'giants', 'padres', 'redsox', 'yankees', 'orioles', 'bluejays', 'rays', 'whitesox', 'twins', 'indians', 'royals', 'tigers', 'mariners', 'angels', 'athletics', 'rangers', 'astros'];
+const letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
 
 // Random number generator used to pull from array created above 
-let selectedTeam = teamArray[Math.floor(Math.random() * teamArray.length)];
 
-// testing
-console.log(selectedTeam);
-
-var wins;
-var losses;
-const maxGuess = 9;
-var guessesRemaining = 0;
-var gussedLetters = [];
-var teamLetters = [];
-var underscores = [];
+var wins = 0;
+var losses = 0;
+var guesses;
+var guessedLetters = [];
+var selectedLetter = "";
 
 
-// ------------------------------FUNCTIONS-------------------------------------
 
-function startGame() {
-    // reset guesses and display on html 
-    let guessesRemaining = maxGuess;
-    document.getElementById('guesses-remaining').innerHTML = "Guesses Remaining: " + guessesRemaining;
-    // take letters from selected word and turn into array of '_' 
-    let underscores = function () {
-        for (let i = 0; i < selectedTeam.length; i++) {
-            unsolvedLetters.push('_ ');
-        }
-        console.log(underscores)
-    }
+function start() {
+    selectedLetter = letters[Math.floor(Math.random() * letters.length)];
+    guesses = 10;
+    guessedLetters = [];
+    console.log(selectedLetter);
+
 }
 
-
-// Event listener to take user input for guesses and add guessed letters to array 'lettersGuessed'
 document.onkeyup = function (event) {
-    var userInput = event.key.toLowerCase();
-    console.log(userInput);
+    start();
+    document.onkeyup = function (event) {
+        var userInput = event.key.toLowerCase();
+        checkGuess(userInput);
+        document.getElementById("guessed-letters").textContent = guessedLetters;
+        document.getElementById("guesses-remaining").textContent = guesses;
+        document.getElementById("wins").textContent = wins;
+        document.getElementById("losses").textContent = losses;
+    }
+
+    // checkGuess function 
+
+    function checkGuess(ltr) {
+        if (guessedLetters.indexOf(ltr) > -1) {
+            alert("You've already guessed that, please try again")
+        }
+        else if (ltr === selectedLetter) {
+            wins++;
+            alert("Congratulations!")
+            start();
+        }
+        else {
+            guesses--;
+            guessedLetters.push(ltr);
+            if (guesses === 0) {
+                alert("Game Over, Try Again!")
+                losses++;
+                start();
+            }
+        }
+
+
+    }
+
 }
-    // if user guess is correct
 
-    // replace underscore with correct guess 
+    // testing
+    // console.log(userInput);
+    // console.log(guessedLetters);
+    // console.log(selectedLetter);
 
 
-    // // if not, push to wrongGuess array
 
 
-//Check to see if user has won or guesses have run out and loop back to start of guess logic 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
